@@ -44,23 +44,27 @@ namespace Einar.Core
 
         public void SetupControls(bool inverted)
         {
-            _controlsInverted = inverted;
-            _inputHandler.LeftButtonPressed += _controlsInverted? DiscardColor: Deliver;
-            _inputHandler.RightButtonPressed += _controlsInverted? Deliver: DiscardColor;
+            //_controlsInverted = inverted;
+            _inputHandler.LeftButtonPressed +=  _colorPicker.SelectNextDelColor;
+            _inputHandler.RightButtonPressed +=  _colorPicker.SelectNextDelShape;
+
+            _inputHandler.DoubleButtonPressed += Shoot;
         }
         
         public void DisableControls()
         {
-            _inputHandler.LeftButtonPressed -= _controlsInverted? DiscardColor: Deliver;
-            _inputHandler.RightButtonPressed -= _controlsInverted? Deliver: DiscardColor;
+            _inputHandler.LeftButtonPressed -=  _colorPicker.SelectNextDelColor;
+            _inputHandler.RightButtonPressed -=  _colorPicker.SelectNextDelShape;
+
+            _inputHandler.DoubleButtonPressed -= Shoot;
         }
         
         /// <summary>
         /// Delivers to a nearby delivery point.
         /// </summary>
-        void Deliver()
+        void Shoot()
         {
-            _colorPicker.Deliver();
+            _colorPicker.ShootDelivery();
         }
 
         /// <summary>

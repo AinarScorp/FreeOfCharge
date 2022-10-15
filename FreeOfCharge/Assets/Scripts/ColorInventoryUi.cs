@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,42 +8,92 @@ namespace William
 {
     public class ColorInventoryUi : MonoBehaviour
     {
-        [SerializeField] Image[] _inventorySlotImages;
+        [SerializeField] HorizontalLayoutGroup colorTransform, shapeTransform;
+        [SerializeField] Image colorImagePrefab;
+        [SerializeField] Image shapeImagePrefab;
+        [SerializeField] Image colorCrosshair, shapeCrosshair;
+
+        [SerializeField] ColorPicker _colorPicker;
+        List<Image> colorImages = new List<Image>();
+        List<Image> shapeImages = new List<Image>();
+
+
 
         void OnEnable()
         {
-            ColorPicker.OnInventoryChange.AddListener(UpdateInventory);
-        }
+            //ColorPicker.OnInventoryChange.AddListener(UpdateInventory);
+            _colorPicker.NewColorSelected += UpdateColorCrosshair;
+            _colorPicker.NewShapeSelected += UpdateShapeCrosshair;
 
+        }
+        
         void OnDisable()
         {
-            ColorPicker.OnInventoryChange.RemoveListener(UpdateInventory);
+            //ColorPicker.OnInventoryChange.RemoveListener(UpdateInventory);
+            _colorPicker.NewColorSelected -= UpdateColorCrosshair;
+            _colorPicker.NewShapeSelected -= UpdateShapeCrosshair;
         }
 
-        /// <summary>
-        /// Updates the inventory ui.
-        /// </summary>
-        /// <param name="inventory">the inventory.</param>
-        void UpdateInventory(List<DeliveryInfo> inventory)
+        void UpdateColorCrosshair(DeliverableColor color)
         {
-            //TODO Add shapes to inventory
-            for (int i = 0; i < inventory.Count; i++)
+            colorCrosshair.rectTransform.position = colorImages[_colorPicker.DeliverableColors.IndexOf(color)].rectTransform.position;
+        }
+        void UpdateShapeCrosshair(DeliverableShape shape)
+        {
+            shapeCrosshair.rectTransform.position = shapeImages[_colorPicker.DeliverableShapes.IndexOf(shape)].rectTransform.position;
+        }
+        void Start()
+        {
+            foreach (var color in _colorPicker.DeliverableColors)
             {
-                switch(inventory[i].Color)
-                {
-                    case DeliverableColor.Red:
-                    _inventorySlotImages[i].color = Color.red;
-                        break;
+                Image createdImage = Instantiate(colorImagePrefab, colorTransform.transform);
 
-                    case DeliverableColor.Blue:
-                    _inventorySlotImages[i].color = Color.blue;
-                        break;
+                createdImage.color = UpdateSLotColor(color);
+                colorImages.Add(createdImage) ;
+            }
 
-                    case DeliverableColor.Yellow:
-                    _inventorySlotImages[i].color = Color.yellow;
-                        break;
-                }
+            foreach (var shape in _colorPicker.DeliverableShapes)
+            {
+                Image cretedImage = Instantiate(shapeImagePrefab, shapeTransform.transform);
+                cretedImage.color = UpdateSlotShape(shape);
+                shapeImages.Add(cretedImage) ;
+                
             }
         }
+        
+        Color UpdateSlotShape(DeliverableShape shape)
+        {
+            switch (shape)
+            {
+                case DeliverableShape.Emerald:
+                    return Color.green;
+
+                case DeliverableShape.Heart:
+                    return Color.magenta;
+
+                case DeliverableShape.Star:
+                    return Color.yellow;
+            }
+
+            return Color.white;
+        }
+        Color UpdateSLotColor(DeliverableColor color)
+        {
+            switch (color)
+                {
+                    case DeliverableColor.Red:
+                        return Color.red;
+
+                    case DeliverableColor.Blue:
+                        return Color.blue;
+
+                    case DeliverableColor.Yellow:
+                        return Color.yellow;
+                }
+            return Color.white;
+
+        }
     }
+
+
 }

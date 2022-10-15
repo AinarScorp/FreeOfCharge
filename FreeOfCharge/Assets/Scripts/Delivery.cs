@@ -15,6 +15,7 @@ namespace William
             Color = color;
             Shape = shape;
         }
+        
     }
 
     public class Delivery : MonoBehaviour
@@ -32,7 +33,7 @@ namespace William
 
         Renderer _renderer;
         MeshFilter _meshFilter;
-        public DeliveryInfo DeliveryInfo { get; private set; }
+        DeliveryInfo thisDeliveryInfo;
 
         void Start()
         {
@@ -41,7 +42,7 @@ namespace William
 
         public void InitializeDelivery(DeliverableColor color, DeliverableShape shape)
         {
-            DeliveryInfo = new DeliveryInfo(color, shape);
+            thisDeliveryInfo = new DeliveryInfo(color, shape);
             _renderer = Instantiate(_shapes[(int)shape], this.transform);
             _renderer.material = _colorMaterials[(int)color];
             //_meshFilter.mesh = _meshs[(int)shape].GetComponent<MeshFilter>().sharedMesh;
@@ -74,12 +75,28 @@ namespace William
         /// <summary>
         /// Completes a delivery.
         /// </summary>
+        
         public void CompleteDelivery(bool correctColor, bool correctShape)
         {
             OnCompletedDelivery?.Invoke(correctColor, correctShape);
             gameObject.SetActive(false);
         }
 
+        public void CompleteDelivery(DeliveryInfo deliveredInfo)
+        {
+
+            if (thisDeliveryInfo.Color == deliveredInfo.Color && thisDeliveryInfo.Shape == deliveredInfo.Shape)
+            {
+                Debug.Log("yey this was correct");
+            }
+            else
+            {
+                Debug.Log("Oh nooooo");
+
+            }
+
+            this.gameObject.SetActive(false);
+        }
         public void ToggleParticle(bool setTo)
         {
             return;

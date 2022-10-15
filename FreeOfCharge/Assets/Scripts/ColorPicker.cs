@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,37 +24,43 @@ namespace William
 
     public class ColorPicker : MonoBehaviour
     {
-        public static ColorPicker Instance;
-
         public static UnityEvent<List<DeliveryInfo>> OnInventoryChange = new UnityEvent<List<DeliveryInfo>>();
+        public event Action<DeliverableColor> NewColorSelected;
+        public event Action<DeliverableShape> NewShapeSelected;
 
-        //List<DeliverableColor> _colorList = new List<DeliverableColor>();
+        [SerializeField] List<DeliverableColor> _deliverableColors = new List<DeliverableColor>();
+
+        [SerializeField] List<DeliverableShape> _deliverableShapes = new List<DeliverableShape>();
+
         List<DeliveryInfo> _deliveryInfoList = new List<DeliveryInfo>();
         DeliveryInfo CurrentDeliveryInfo => _deliveryInfoList[0];
 
         [SerializeField] ThrownDelivery _thrownDeliveryPrefab;
 
 
-        [Tooltip("Red, Blue, Yellow")]
-        [SerializeField] Material[] _colorsMaterials;
+        [Tooltip("Red, Blue, Yellow")] [SerializeField]
+        Material[] _colorsMaterials;
 
         List<Delivery> _deliveriesInRange = new List<Delivery>();
         public Delivery DeliveryInRange => GetBestDeliveryOption();
 
+        public List<DeliverableColor> DeliverableColors => _deliverableColors;
+
+        public List<DeliverableShape> DeliverableShapes => _deliverableShapes;
+
+
         [SerializeField] CrosshairFollowTarget _crosshairFollowTarget;
+        [SerializeField] Transform _shootingPointTransform;
 
+        DeliverableColor _currentDeliveryColor;
+        DeliverableShape _currentDeliveryShape;
+        public DeliverableColor CurrentDeliveryColor => _currentDeliveryColor;
 
-        void Awake()
-        {
-            if(Instance == null) Instance = this;    
-            else Destroy(gameObject);
-        }
+        public DeliverableShape CurrentDeliveryShape => _currentDeliveryShape;
 
         void Start()
         {
-            AddRandomDelivery();
-            AddRandomDelivery();
-            AddRandomDelivery();
+            SetupDeliveries();
         }
 
         /// <summary>
@@ -74,17 +81,48 @@ namespace William
         public void DiscardDelivery()
         {
             RemoveDelivery();
-            AddRandomDelivery();
+            SetupDeliveries();
         }
 
         /// <summary>
         /// Adds a random delivery to the inventory.
         /// </summary>
-        public void AddRandomDelivery()
+        public void SetupDeliveries()
         {
-            var delivery = new DeliveryInfo((DeliverableColor)Random.Range(0, 3), (DeliverableShape)Random.Range(0, 3));
-            _deliveryInfoList.Add(delivery);
+            _currentDeliveryColor = _deliverableColors[0];
+            _currentDeliveryShape = _deliverableShapes[0];
+            NewColorSelected?.Invoke(_currentDeliveryColor);
+            NewShapeSelected?.Invoke(_currentDeliveryShape);
             OnInventoryChange?.Invoke(_deliveryInfoList);
+        }
+
+        public void SelectNextDelColor()
+        {
+
+            int nextIndex = _deliverableColors.IndexOf(_currentDeliveryColor);
+            nextIndex++;
+            if (nextIndex >= _deliverableColors.Count)
+            {
+                nextIndex = 0;
+            }
+
+            _currentDeliveryColor = _deliverableColors[nextIndex];
+            NewColorSelected?.Invoke(_currentDeliveryColor);
+
+        }
+
+        public void SelectNextDelShape()
+        {
+            int nextIndex = _deliverableShapes.IndexOf(_currentDeliveryShape);
+            nextIndex++;
+            if (nextIndex >= _deliverableShapes.Count)
+            {
+                nextIndex = 0;
+            }
+
+            _currentDeliveryShape = _deliverableShapes[nextIndex];
+            NewShapeSelected?.Invoke(_currentDeliveryShape);
+
         }
 
         /// <summary>
@@ -93,17 +131,18 @@ namespace William
         /// <returns>the best delivery point.</returns>
         Delivery GetBestDeliveryOption()
         {
-            if (_deliveriesInRange.Count <= 0) return null;
-
-            var correctColors = new List<Delivery>();
-
-            foreach (var delivery in _deliveriesInRange)
-            {
-                if (delivery.DeliveryInfo.Color == CurrentDeliveryInfo.Color) correctColors.Add(delivery);
-            }
-
-            if(correctColors.Count == 0) return GetClosestDeliveryPoint(_deliveriesInRange);
-            else return GetClosestDeliveryPoint(correctColors);
+            return null;
+            // if (_deliveriesInRange.Count <= 0) return null;
+            //
+            // var correctColors = new List<Delivery>();
+            //
+            // foreach (var delivery in _deliveriesInRange)
+            // {
+            //     if (delivery.DeliveryInfo.Color == CurrentDeliveryInfo.Color) correctColors.Add(delivery);
+            // }
+            //
+            // if (correctColors.Count == 0) return GetClosestDeliveryPoint(_deliveriesInRange);
+            // else return GetClosestDeliveryPoint(correctColors);
         }
 
         /// <summary>
@@ -124,54 +163,28 @@ namespace William
                     closestRange = distance;
                 }
             }
+
             return closest;
         }
 
         /// <summary>
         /// Delivers the current delivery to a nearby delivery point.
         /// </summary>
-        public void Deliver()
+        public void ShootDelivery()
         {
-            if (!DeliveryInRange) return;
+            //make it just shoot forward
 
-            ThrownDelivery thrown = Instantiate(_thrownDeliveryPrefab, transform.position, Quaternion.identity);
-            thrown.Throw(DeliveryInRange, CurrentDeliveryInfo);
-            thrown.GetComponent<Renderer>().material = _colorsMaterials[(int)CurrentDeliveryInfo.Color];
-
-            DiscardDelivery();
-            _deliveriesInRange.Remove(DeliveryInRange);
-            UpdateCrosshair();
-        }
-
-        public IEnumerator DisableFor(float duration)
-        {
-            this.enabled = false;
-            yield return new WaitForSeconds(duration);
-            this.enabled = true;
-        }
-
-        void OnTriggerEnter(Collider col)
-        {
-            if (col.tag != "DeliveryPoint") return;
-
-            var deliveryPoint = col.GetComponent<Delivery>();
-
-            if (deliveryPoint.DeliveryStarted) return;
-
-            _deliveriesInRange.Add(deliveryPoint);
-            UpdateCrosshair();
+            ThrownDelivery projectile = Instantiate(_thrownDeliveryPrefab, transform.position, Quaternion.identity);
+            DeliveryInfo info = new DeliveryInfo(_currentDeliveryColor, _currentDeliveryShape);
+            projectile.Throw(info, _shootingPointTransform.forward);
+            //projectile.GetComponent<Renderer>().material = _colorsMaterials[(int)CurrentDeliveryInfo.Color];
 
         }
 
-        void OnTriggerExit(Collider col)
-        {
-            if (col.tag != "DeliveryPoint") return;
-            Delivery delivery = col.GetComponent<Delivery>();
-            delivery.ToggleParticle(false);
-            _deliveriesInRange.Remove(delivery);
-            
-            UpdateCrosshair();
-        }
+        //these two you should remove
+
+
+
 
         /// <summary>
         /// Updates the crosshair.
@@ -183,14 +196,14 @@ namespace William
                 delivery.ToggleParticle(false);
             }
 
-            if (DeliveryInRange !=null)
+            if (DeliveryInRange != null)
             {
                 DeliveryInRange.ToggleParticle(true);
             }
+
             if (!_crosshairFollowTarget) return;
-            
+
             _crosshairFollowTarget.gameObject.SetActive(DeliveryInRange);
-            
         }
     }
 }

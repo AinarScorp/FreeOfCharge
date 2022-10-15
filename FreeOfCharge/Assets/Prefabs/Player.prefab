@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &226329470214361171
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6351769991794096527}
+  m_Layer: 6
+  m_Name: ShootingPlaceholder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6351769991794096527
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226329470214361171}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.61, z: 1.41}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6554828449073421628}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1316974728351211929
 GameObject:
   m_ObjectHideFlags: 0
@@ -4996,6 +5027,7 @@ Transform:
   - {fileID: 3376356280250740836}
   - {fileID: 279053224695411535}
   - {fileID: 1594258545470762251}
+  - {fileID: 6351769991794096527}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5029,6 +5061,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 255a1c251b5a88045ba62bee75d77214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftPressed: 0
+  rightPressed: 0
+  bothPressed: 0
+  inputDelay: 0.01
+  rightCorotineOn: 0
+  leftCorOn: 0
+  doubleOn: 0
+  rightHeldOn: 0
+  leftHeldOn: 0
 --- !u!114 &7762122186079060873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5041,9 +5082,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28552a5d85ccea14cabe6c7af7c47662, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gravity: -15
+  _heavierGravity: -30
+  _gravityMultiplier: 2
+  groundedRadius: 0.5
+  _groundLayers:
+    serializedVersion: 2
+    m_Bits: 0
   _maxSpeed: 20
   _minSpeed: 20
   _speedBuildUpMultiplier: 1
+  _heightToReach: 5
+  _jumpCooldown: 0.5
 --- !u!114 &6554828449073421629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5056,11 +5106,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79091f5d6e16304697731238ad6629d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _deliverableColors: 000000000100000002000000
+  _deliverableShapes: 000000000100000002000000
   _thrownDeliveryPrefab: {fileID: -9177713655875706133, guid: 990bcd809c1e7a14da3146abba585f3b,
     type: 3}
-  _inputHandler: {fileID: 6554828449073421630}
-  _colorsMaterials: []
+  _colorsMaterials:
+  - {fileID: 2100000, guid: 6a5befe73a4ab7a4f9c35cd758cf731a, type: 2}
+  - {fileID: 2100000, guid: 393dbede7301e0546b882688afc34037, type: 2}
+  - {fileID: 2100000, guid: b211235f6fbd7d8479d1ddf23e43842c, type: 2}
   _crosshairFollowTarget: {fileID: 0}
+  _shootingPointTransform: {fileID: 6351769991794096527}
 --- !u!114 &6554828449073421624
 MonoBehaviour:
   m_ObjectHideFlags: 0
