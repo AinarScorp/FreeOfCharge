@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Einar.Inputs;
+using TMPro;
 using UnityEngine.Events;
 
 namespace William
@@ -109,10 +110,15 @@ namespace William
         public DeliveryContainer<DeliverableShape> CurrentDeliveryShape => _currentDeliveryShape;
 
         [SerializeField] float restoreChargeSpeed = 1.0f;
+        [SerializeField] TextMeshProUGUI cantShootMessage;
+        Coroutine messageIsShowing;
+        float messageDuration = 2.0f;
+
 
         void Start()
         {
             SetupDeliveries();
+            cantShootMessage.gameObject.SetActive(false);
         }
 
         public void SetupDeliveries()
@@ -196,7 +202,13 @@ namespace William
         public void ShootDelivery()
         {
             //make it just shoot forward
-            if (!_currentDeliveryColor.CanShoot() || !_currentDeliveryShape.CanShoot()) return;
+            if (!_currentDeliveryColor.CanShoot() || !_currentDeliveryShape.CanShoot())
+            {
+                
+                messageIsShowing = StartCoroutine(NoChargesMessage());
+                
+                return;
+            }
             _currentDeliveryColor.SubtractCharge();
             _currentDeliveryShape.SubtractCharge();
 
@@ -204,6 +216,18 @@ namespace William
             DeliveryInfo info = new DeliveryInfo(_currentDeliveryColor.GetType(), _currentDeliveryShape.GetType());
             projectile.Throw(info, _shootingPointTransform.forward);
             //projectile.GetComponent<Renderer>().material = _colorsMaterials[(int)CurrentDeliveryInfo.Color];
+        }
+
+        IEnumerator NoChargesMessage()
+        {
+            if (messageIsShowing !=null) yield break;
+
+            cantShootMessage.gameObject.SetActive(true);
+            yield return new WaitForSeconds(messageDuration);
+            cantShootMessage.gameObject.SetActive(false);
+
+            
+            messageIsShowing = null;
         }
     }
 }

@@ -24,7 +24,6 @@ namespace Einar.Movement
         float _maxSpeed = 20.0f;
 
         [SerializeField] float _minSpeed = 20.0f;
-        [SerializeField] float _speedBuildUpMultiplier = 1;
 
         [Header("Jumping")] // 
         float _jumpCooldownTimer;
@@ -88,11 +87,6 @@ namespace Einar.Movement
             ChangeVelocityByGravity();
         }
 
-        void BuildUpSpeed()
-        {
-            if (_currentSpeed > _maxSpeed) return;
-            _currentSpeed += Time.deltaTime * _speedBuildUpMultiplier;
-        }
 
         public void ResetSpeed()
         {

@@ -1,15 +1,26 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerWaiterExecutor : MonoBehaviour
 {
+    [SerializeField] TextMeshProUGUI moverText;
+    [SerializeField] TextMeshProUGUI shooterText;
+
     [SerializeField] GameObject playerPrefab;
     [SerializeField] bool setMoverFirst;
     int spawnedControlsAmount;
     PlayerInputManager _playerInputManager;
+
+    void Start()
+    {
+        moverText.gameObject.SetActive(true);
+        shooterText.gameObject.SetActive(false);
+
+    }
 
     public void SetPlayerControls(PlayerInput playerInput)
     {
@@ -22,6 +33,8 @@ public class PlayerWaiterExecutor : MonoBehaviour
         PlayerInfo playerInfo = playerInput.GetComponent<PlayerInfo>();
         if (spawnedControlsAmount ==1)
         {
+            moverText.gameObject.SetActive(false);
+            shooterText.gameObject.SetActive(true);
             //_playerInputManager.playerPrefab.
             if (setMoverFirst)
             {
@@ -34,6 +47,7 @@ public class PlayerWaiterExecutor : MonoBehaviour
         }
         else if (spawnedControlsAmount ==2)
         {
+            shooterText.gameObject.SetActive(false);
 
             if (setMoverFirst)
             {
