@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Einar.Core;
 using UnityEngine;
 
 namespace William
@@ -23,18 +24,21 @@ namespace William
         public static event Action<bool, bool> OnCompletedDelivery;
     
         [Tooltip("Red, Blue, Yellow")]
-        [SerializeField] Material[] _colorMaterials;
         [SerializeField] ParticleSystem.MinMaxGradient[] _colorOverLifeTime;
         [SerializeField] ParticleSystem[] _ringParticles;
         [Tooltip("Emerald, Heart, Star")]
+        [SerializeField] Material[] _colorMaterials;
         [SerializeField] MeshRenderer[] _shapes;
-
+        [SerializeField] ParticleSystem YeyParticle;
         [HideInInspector] public bool DeliveryStarted = false;
 
         Renderer _renderer;
         MeshFilter _meshFilter;
         DeliveryInfo thisDeliveryInfo;
 
+        public Material[] ColorMaterials => _colorMaterials;
+
+        public MeshRenderer[] Shapes => _shapes;
         void Start()
         {
             InitializeDelivery((DeliverableColor)UnityEngine.Random.Range(0, 3), (DeliverableShape)UnityEngine.Random.Range(0, 3));
@@ -85,16 +89,18 @@ namespace William
         public void CompleteDelivery(DeliveryInfo deliveredInfo)
         {
 
-            if (thisDeliveryInfo.Color == deliveredInfo.Color && thisDeliveryInfo.Shape == deliveredInfo.Shape)
-            {
-                Debug.Log("yey this was correct");
-            }
-            else
-            {
-                Debug.Log("Oh nooooo");
+                if (YeyParticle !=null)
+                {
+                    RoadSimulation roadSimulation = FindObjectOfType<RoadSimulation>();
 
-            }
-
+                    ParticleSystem particleSystem = Instantiate(YeyParticle, transform.position, YeyParticle.transform.rotation, roadSimulation.transform);
+                    bool colorDelivered = thisDeliveryInfo.Color == deliveredInfo.Color;
+                    bool shapeDelivered = thisDeliveryInfo.Shape == deliveredInfo.Shape;
+                    
+                    particleSystem.GetComponent<ParticleCollector>().SetupParticle
+                        (_renderer.GetComponent<MeshFilter>().mesh, _renderer.material, thisDeliveryInfo,colorDelivered,shapeDelivered);
+                }
+                
             this.gameObject.SetActive(false);
         }
         public void ToggleParticle(bool setTo)

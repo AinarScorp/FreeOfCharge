@@ -60,10 +60,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d405b21891d382c48ae63789c99b7cfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _colorMaterials:
-  - {fileID: 2100000, guid: 6a5befe73a4ab7a4f9c35cd758cf731a, type: 2}
-  - {fileID: 2100000, guid: 393dbede7301e0546b882688afc34037, type: 2}
-  - {fileID: 2100000, guid: b211235f6fbd7d8479d1ddf23e43842c, type: 2}
   _colorOverLifeTime:
   - m_Mode: 1
     m_GradientMin:
@@ -250,10 +246,16 @@ MonoBehaviour:
     m_ColorMax: {r: 0, g: 0, b: 0, a: 0}
   _ringParticles:
   - {fileID: 9024542411634833702}
+  _colorMaterials:
+  - {fileID: 2100000, guid: 6a5befe73a4ab7a4f9c35cd758cf731a, type: 2}
+  - {fileID: 2100000, guid: 393dbede7301e0546b882688afc34037, type: 2}
+  - {fileID: 2100000, guid: b211235f6fbd7d8479d1ddf23e43842c, type: 2}
   _shapes:
   - {fileID: 792481753854619510, guid: 9fed8d864cf30b840a1d0f08ba01ac7b, type: 3}
   - {fileID: 6827725400956918654, guid: 936a8c1dcc6324c47af2e97518e245fa, type: 3}
   - {fileID: 5095706132236513646, guid: d6d4de3b453b13447b52d4d19592d32a, type: 3}
+  YeyParticle: {fileID: 5395729035929739454, guid: 3ab12a07d08082f4b807c408863e5f1b,
+    type: 3}
   DeliveryStarted: 0
 --- !u!54 &2886095123379285531
 Rigidbody:

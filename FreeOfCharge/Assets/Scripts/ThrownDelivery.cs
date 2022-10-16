@@ -9,24 +9,19 @@ namespace William
     public class ThrownDelivery : MonoBehaviour
     {
 
-        [SerializeField] float _animationSpeed;
         [SerializeField] float _shotingSpeed;
         [SerializeField] Rigidbody _rigidbody;
-        Delivery _delivery;
+        [SerializeField] Delivery _delivery;
         DeliveryInfo _deliveryInfo;
         [SerializeField]LayerMask _layerMask;
 
 
-        /// <summary>
-        /// Throws a projectile towards a delivery point.
-        /// </summary>
-        /// <param name="delivery">the delivery point.</param>
-        /// <param name="color">the info of the thrown delivery.</param>
-        
         public void Throw(DeliveryInfo info, Vector3 direction)
         {
             _deliveryInfo = info;
             _rigidbody.velocity = direction.normalized * _shotingSpeed;
+            MeshRenderer meshRenderer = Instantiate(_delivery.Shapes[(int)_deliveryInfo.Shape], transform);
+            meshRenderer.material = _delivery.ColorMaterials[(int)_deliveryInfo.Color];
         }
         
         void OnTriggerEnter(Collider other)
@@ -39,7 +34,9 @@ namespace William
                 if (delivery!=null)
                 {
                     delivery.CompleteDelivery(_deliveryInfo);
+                    this.gameObject.SetActive(false);
                 }
+                
             }
         }
 

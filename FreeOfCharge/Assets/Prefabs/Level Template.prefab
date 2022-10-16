@@ -746,16 +746,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1776163421280610263, guid: 577a15124b23b584fbf18d14ef2f6338,
         type: 3}
-      propertyPath: _sectorWidth
-      value: 2.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 1776163421280610263, guid: 577a15124b23b584fbf18d14ef2f6338,
-        type: 3}
-      propertyPath: _sectorHeight
-      value: 4.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1776163421280610263, guid: 577a15124b23b584fbf18d14ef2f6338,
-        type: 3}
       propertyPath: _maxObstacleToSpawn
       value: 0
       objectReference: {fileID: 0}

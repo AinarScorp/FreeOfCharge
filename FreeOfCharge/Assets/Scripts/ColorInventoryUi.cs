@@ -14,6 +14,7 @@ namespace William
         [SerializeField] Image colorCrosshair, shapeCrosshair;
 
         [SerializeField] ColorPicker _colorPicker;
+        [SerializeField] Sprite starImage, heartImage, emeraldImage;
         List<Image> colorImages = new List<Image>();
         List<Image> shapeImages = new List<Image>();
 
@@ -34,11 +35,11 @@ namespace William
             _colorPicker.NewShapeSelected -= UpdateShapeCrosshair;
         }
 
-        void UpdateColorCrosshair(DeliverableColor color)
+        void UpdateColorCrosshair(DeliveryContainer<DeliverableColor> color)
         {
             colorCrosshair.rectTransform.position = colorImages[_colorPicker.DeliverableColors.IndexOf(color)].rectTransform.position;
         }
-        void UpdateShapeCrosshair(DeliverableShape shape)
+        void UpdateShapeCrosshair(DeliveryContainer<DeliverableShape> shape)
         {
             shapeCrosshair.rectTransform.position = shapeImages[_colorPicker.DeliverableShapes.IndexOf(shape)].rectTransform.position;
         }
@@ -47,16 +48,26 @@ namespace William
             foreach (var color in _colorPicker.DeliverableColors)
             {
                 Image createdImage = Instantiate(colorImagePrefab, colorTransform.transform);
+                CountDownImage countDownImage = createdImage.GetComponentInChildren<CountDownImage>();
+                countDownImage.SetupCountDown(color);
+                color.ChargeAdded += countDownImage.UpdateCountDown;
+                color.ChargeSubtracted += countDownImage.UpdateCountDown;
 
-                createdImage.color = UpdateSLotColor(color);
+                createdImage.color = UpdateSLotColor(color.GetType());
                 colorImages.Add(createdImage) ;
             }
 
             foreach (var shape in _colorPicker.DeliverableShapes)
             {
-                Image cretedImage = Instantiate(shapeImagePrefab, shapeTransform.transform);
-                cretedImage.color = UpdateSlotShape(shape);
-                shapeImages.Add(cretedImage) ;
+                Image createdImage = Instantiate(shapeImagePrefab, shapeTransform.transform);
+                CountDownImage countDownImage = createdImage.GetComponentInChildren<CountDownImage>();
+                countDownImage.SetupCountDown(shape);
+                shape.ChargeAdded += countDownImage.UpdateCountDown;
+                shape.ChargeSubtracted += countDownImage.UpdateCountDown;
+                //CountDownImage<DeliveryContainer<DeliverableShape>> countDownImage = createdImage.GetComponentInChildren<>()
+                createdImage.color = UpdateSlotShape(shape.GetType());
+                createdImage.sprite = UpdateSlotShapeSprite(shape.GetType());
+                shapeImages.Add(createdImage) ;
                 
             }
         }
@@ -76,6 +87,22 @@ namespace William
             }
 
             return Color.white;
+        }
+        Sprite UpdateSlotShapeSprite(DeliverableShape shape)
+        {
+            switch (shape)
+            {
+                case DeliverableShape.Emerald:
+                    return emeraldImage;
+
+                case DeliverableShape.Heart:
+                    return heartImage;
+
+                case DeliverableShape.Star:
+                    return starImage;
+            }
+
+            return null;
         }
         Color UpdateSLotColor(DeliverableColor color)
         {

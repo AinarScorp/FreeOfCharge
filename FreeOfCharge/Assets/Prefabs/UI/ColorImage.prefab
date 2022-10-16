@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 865345589270912236}
   - component: {fileID: 6859717016792268158}
   - component: {fileID: 5989766013855304711}
+  - component: {fileID: 1311841303184767025}
   m_Layer: 5
   m_Name: ColorImage
   m_TagString: Untagged
@@ -153,3 +154,16 @@ MonoBehaviour:
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1311841303184767025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4070688019810275328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45a3ddc1674f8414f8f46d5f3526f71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _image: {fileID: 5989766013855304711}

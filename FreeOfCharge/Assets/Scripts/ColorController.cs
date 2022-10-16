@@ -59,21 +59,13 @@ namespace Einar.Core
             _inputHandler.DoubleButtonPressed -= Shoot;
         }
         
-        /// <summary>
-        /// Delivers to a nearby delivery point.
-        /// </summary>
+
         void Shoot()
         {
             _colorPicker.ShootDelivery();
         }
 
-        /// <summary>
-        /// Discards the current color.
-        /// </summary>
-        void DiscardColor()
-        {
-            _colorPicker.DiscardDelivery();
-        }
+
  
     }
     

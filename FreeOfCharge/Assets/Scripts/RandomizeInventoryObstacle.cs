@@ -12,7 +12,7 @@ namespace William
             var player = Player.GetComponent<ColorPicker>();
             for (int i = 0; i < 3; i++)
             {
-                player.DiscardDelivery();
+                //player.DiscardDelivery();
             }
         }
     }

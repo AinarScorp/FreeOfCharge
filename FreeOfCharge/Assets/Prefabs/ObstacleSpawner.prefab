@@ -44,12 +44,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b8d47737474dd94389a59b44e83e2a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sectorWidth: 5
-  _sectorHeight: 5
+  _minObstaclesToSpawn: 0
+  _maxObstacleToSpawn: 1
+  _obstacleTypes: []
+  spawnObstacles: 0
+  delivery: {fileID: 2886095123379285532, guid: 2d86db4402082d546b1e5cc97654a2a0,
+    type: 3}
+  _sectorWidth: 10
+  _sectorHeight: 10
   _width: 10
   _height: 10
-  _obstaclePrefab: []
-  _obstacleColorBorder: {r: 0.8773585, g: 0.33438945, b: 0.81135046, a: 0}
+  _drawAlways: 0
   _showObstacleBorders: 1
   _showSectorLines: 1
   _spawnPointSizeMultiplier: 1

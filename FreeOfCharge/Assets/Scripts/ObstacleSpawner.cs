@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using William;
 using Random = UnityEngine.Random;
 
 namespace Einar.Core
@@ -16,6 +17,10 @@ namespace Einar.Core
         [Tooltip("here you can put different obstacles you want to be spawned")]
         [SerializeField] Obstacle[] _obstacleTypes;
 
+        [Header("Delivery types")] [SerializeField]
+        bool spawnObstacles = false;
+        [Tooltip("here you can put different obstacles you want to be spawned")]
+        [SerializeField] Delivery delivery;
 
         [Header("Sector Settings")]
         [SerializeField] float _sectorWidth = 10.0f; 
@@ -47,10 +52,43 @@ namespace Einar.Core
         void Start()
         {
             CreateSpawnPoints();
-
-            SpawnObstacles();
+            if (spawnObstacles)
+            {
+                
+                SpawnObstacles();
+            }
+            else
+            {
+                SpawnDeliveries();
+            }
         }
 
+        void SpawnDeliveries()
+        {
+            int maxToSpawn = Mathf.Max(_minObstaclesToSpawn, _maxObstacleToSpawn);
+            int minToSpawn = Mathf.Min(_minObstaclesToSpawn, _maxObstacleToSpawn);
+            int amountOfSpawns = -1;
+
+            if (minToSpawn == maxToSpawn) amountOfSpawns = minToSpawn;
+            else
+            {
+                int randomAmountOfSpanws = Random.Range(minToSpawn, maxToSpawn);
+                amountOfSpawns = randomAmountOfSpanws;
+            }
+
+            for (int i = 0; i < amountOfSpawns; i++)
+            {
+                if (_spawnPoints.Count < 1) return;
+                int randomSpanwPointIndex = Random.Range(0, _spawnPoints.Count);
+
+                if (_obstacleTypes.Length < 1) return;
+                int randomObstacleIndex = Random.Range(0, _obstacleTypes.Length);
+
+                SpawnPoint spawnPoint = _spawnPoints[randomSpanwPointIndex];
+                Instantiate(delivery, spawnPoint._position, delivery.transform.rotation, this.transform);
+                _spawnPoints.Remove(spawnPoint);
+            }
+        }
         void SpawnObstacles()
         {
             
