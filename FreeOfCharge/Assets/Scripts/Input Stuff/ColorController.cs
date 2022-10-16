@@ -2,8 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Einar.Inputs;
-using Einar.UI;
-using Unity.VisualScripting;
 using UnityEngine;
 using William;
 namespace Einar.Core

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Einar.Inputs;
 using UnityEngine.Events;
-using Einar.UI;
 
 namespace William
 {
@@ -101,7 +100,6 @@ namespace William
         public List<DeliveryContainer<DeliverableShape>> DeliverableShapes => _deliverableShapes;
 
 
-        [SerializeField] CrosshairFollowTarget _crosshairFollowTarget;
         [SerializeField] Transform _shootingPointTransform;
 
         DeliveryContainer<DeliverableColor> _currentDeliveryColor;
