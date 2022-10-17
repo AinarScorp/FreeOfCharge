@@ -113,10 +113,26 @@ namespace William
         [SerializeField] TextMeshProUGUI cantShootMessage;
         Coroutine messageIsShowing;
         float messageDuration = 2.0f;
-
+        [SerializeField] Delivery deliverAboveHead;
 
         void Start()
         {
+            NewColorSelected += (colorChange) =>
+            {
+                if (deliverAboveHead == null)
+                {
+                    Debug.LogError("you forgot to attach above head");
+                }
+                deliverAboveHead.DisplayDeliveryAboveHead(_currentDeliveryColor.GetType(), _currentDeliveryShape.GetType());
+            };
+            NewShapeSelected += (colorChange) =>
+            {
+                if (deliverAboveHead == null)
+                {
+                    Debug.LogError("you forgot to attach above head");
+                }
+                deliverAboveHead.DisplayDeliveryAboveHead(_currentDeliveryColor.GetType(), _currentDeliveryShape.GetType());
+            };
             SetupDeliveries();
             cantShootMessage.gameObject.SetActive(false);
         }

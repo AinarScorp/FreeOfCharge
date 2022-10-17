@@ -16,22 +16,24 @@ namespace William
             Color = color;
             Shape = shape;
         }
-        
     }
 
     public class Delivery : MonoBehaviour
     {
         public static event Action<bool, bool> OnCompletedDelivery;
-    
-        [Tooltip("Red, Blue, Yellow")]
-        [SerializeField] ParticleSystem.MinMaxGradient[] _colorOverLifeTime;
+
+        [Tooltip("Red, Blue, Yellow")] [SerializeField]
+        ParticleSystem.MinMaxGradient[] _colorOverLifeTime;
+
         [SerializeField] ParticleSystem[] _ringParticles;
-        [Tooltip("Emerald, Heart, Star")]
-        [SerializeField] Material[] _colorMaterials;
+
+        [Tooltip("Emerald, Heart, Star")] [SerializeField]
+        Material[] _colorMaterials;
+
         [SerializeField] MeshRenderer[] _shapes;
         [SerializeField] ParticleSystem YeyParticle;
         [HideInInspector] public bool DeliveryStarted = false;
-
+        [SerializeField] bool isPlayerReference = false;
         Renderer _renderer;
         MeshFilter _meshFilter;
         DeliveryInfo thisDeliveryInfo;
@@ -39,9 +41,29 @@ namespace William
         public Material[] ColorMaterials => _colorMaterials;
 
         public MeshRenderer[] Shapes => _shapes;
+
         void Start()
         {
-            InitializeDelivery((DeliverableColor)UnityEngine.Random.Range(0, 3), (DeliverableShape)UnityEngine.Random.Range(0, 3));
+            if (!isPlayerReference)
+            {
+                InitializeDelivery((DeliverableColor)UnityEngine.Random.Range(0, 3), (DeliverableShape)UnityEngine.Random.Range(0, 3));
+            }
+        }
+
+        public void DisplayDeliveryAboveHead(DeliverableColor color, DeliverableShape shape)
+        {
+            //thisDeliveryInfo = new DeliveryInfo(color, shape);
+            if (_renderer != null)
+            {
+                Destroy(_renderer.gameObject);
+            }
+            //
+            // if (color == null || shape -- null)
+            // {
+            //     
+            // }
+            _renderer = Instantiate(_shapes[(int)shape], this.transform);
+            _renderer.material = _colorMaterials[(int)color];
         }
 
         public void InitializeDelivery(DeliverableColor color, DeliverableShape shape)
@@ -63,8 +85,8 @@ namespace William
             {
                 ParticleSystem.ColorOverLifetimeModule colorOverLifetimeModule = ringParticle.colorOverLifetime;
                 colorOverLifetimeModule.color = _colorOverLifeTime[(int)color];
-                
             }
+
             ToggleParticle(false);
         }
 
@@ -79,7 +101,6 @@ namespace William
         /// <summary>
         /// Completes a delivery.
         /// </summary>
-        
         public void CompleteDelivery(bool correctColor, bool correctShape)
         {
             OnCompletedDelivery?.Invoke(correctColor, correctShape);
@@ -88,21 +109,21 @@ namespace William
 
         public void CompleteDelivery(DeliveryInfo deliveredInfo)
         {
+            if (YeyParticle != null)
+            {
+                RoadSimulation roadSimulation = FindObjectOfType<RoadSimulation>();
 
-                if (YeyParticle !=null)
-                {
-                    RoadSimulation roadSimulation = FindObjectOfType<RoadSimulation>();
+                ParticleSystem particleSystem = Instantiate(YeyParticle, transform.position, YeyParticle.transform.rotation, roadSimulation.transform);
+                bool colorDelivered = thisDeliveryInfo.Color == deliveredInfo.Color;
+                bool shapeDelivered = thisDeliveryInfo.Shape == deliveredInfo.Shape;
 
-                    ParticleSystem particleSystem = Instantiate(YeyParticle, transform.position, YeyParticle.transform.rotation, roadSimulation.transform);
-                    bool colorDelivered = thisDeliveryInfo.Color == deliveredInfo.Color;
-                    bool shapeDelivered = thisDeliveryInfo.Shape == deliveredInfo.Shape;
-                    
-                    particleSystem.GetComponent<ParticleCollector>().SetupParticle
-                        (_renderer.GetComponent<MeshFilter>().mesh, _renderer.material, thisDeliveryInfo,colorDelivered,shapeDelivered);
-                }
-                
+                particleSystem.GetComponent<ParticleCollector>().SetupParticle
+                    (_renderer.GetComponent<MeshFilter>().mesh, _renderer.material, thisDeliveryInfo, colorDelivered, shapeDelivered);
+            }
+
             this.gameObject.SetActive(false);
         }
+
         public void ToggleParticle(bool setTo)
         {
             return;
@@ -112,5 +133,4 @@ namespace William
             }
         }
     }
-
 }
