@@ -74,27 +74,18 @@ namespace William
 
     public class ColorPicker : MonoBehaviour
     {
-        public static UnityEvent<List<DeliveryInfo>> OnInventoryChange = new UnityEvent<List<DeliveryInfo>>();
         public event Action<DeliveryContainer<DeliverableColor>> NewColorSelected;
         public event Action<DeliveryContainer<DeliverableShape>> NewShapeSelected;
 
-        //public event Action<DeliveryContainer<DeliverableColor>, DeliveryContainer<DeliverableShape>> HasShot;
 
         [SerializeField] List<DeliveryContainer<DeliverableColor>> _deliverableColors = new List<DeliveryContainer<DeliverableColor>>();
 
         [SerializeField] List<DeliveryContainer<DeliverableShape>> _deliverableShapes = new List<DeliveryContainer<DeliverableShape>>();
-        // [SerializeField] List<DeliverableColor> _deliverableColors = new List<DeliverableColor>();
-        //
-        // [SerializeField] List<DeliverableShape> _deliverableShapes = new List<DeliverableShape>();
 
-        List<DeliveryInfo> _deliveryInfoList = new List<DeliveryInfo>();
-        DeliveryInfo CurrentDeliveryInfo => _deliveryInfoList[0];
 
         [SerializeField] ThrownDelivery _thrownDeliveryPrefab;
 
 
-        List<Delivery> _deliveriesInRange = new List<Delivery>();
-        public Delivery DeliveryInRange => null;
 
         public List<DeliveryContainer<DeliverableColor>> DeliverableColors => _deliverableColors;
 
@@ -143,7 +134,6 @@ namespace William
             _currentDeliveryShape = _deliverableShapes[0];
             NewColorSelected?.Invoke(_currentDeliveryColor);
             NewShapeSelected?.Invoke(_currentDeliveryShape);
-            OnInventoryChange?.Invoke(_deliveryInfoList);
             foreach (var color in _deliverableColors)
             {
                 StartCoroutine(Charging(color));

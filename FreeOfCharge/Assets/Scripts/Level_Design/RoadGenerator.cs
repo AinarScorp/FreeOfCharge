@@ -12,7 +12,6 @@ public class RoadGenerator : MonoBehaviour
     [SerializeField] Transform creatonPlace, destructionPlace;
     [SerializeField] LevelPiece[] startingPieces;
     [SerializeField] float destructionDistance = 10;
-    int currentLevel = 1;
     
     LevelPiece bottomPiece;
     Queue<LevelPiece> levelPiecesQueue = new Queue<LevelPiece>();
@@ -57,15 +56,6 @@ public class RoadGenerator : MonoBehaviour
         
     }
 
-    void IncreaseLevel()
-    {
-        currentLevel++;
-    }
-
-    void DecreaseLevel()
-    {
-        currentLevel--;
-    }
 
     void OnDrawGizmos()
     {

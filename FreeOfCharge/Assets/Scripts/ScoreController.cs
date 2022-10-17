@@ -18,17 +18,7 @@ namespace William
             Instance = this;
         }
 
-        void OnEnable()
-        {
-            Delivery.OnCompletedDelivery += ChangeScore;
-            RoadSimulation.OnSpeedChange += SetScoreMultiplier;
-        }
 
-        void OnDisable()
-        {
-            Delivery.OnCompletedDelivery -= ChangeScore;
-            RoadSimulation.OnSpeedChange -= SetScoreMultiplier;
-        }
 
         /// <summary>
         /// Change the score.

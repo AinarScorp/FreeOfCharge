@@ -8,10 +8,8 @@ namespace Einar.Core
 {
     public class ColorController : MonoBehaviour
     {
-        [SerializeField] DeliverableColor _deliverableColor;
         InputHandler _inputHandler;
         ColorPicker _colorPicker;
-        bool _controlsInverted;
         void Awake()
         {
             _colorPicker = GetComponent<ColorPicker>();
@@ -24,25 +22,21 @@ namespace Einar.Core
                     break;
                 }
             }
-            //_inputHandler = GetComponent<InputHandler>();
         }
 
         void OnEnable()
         {
-            //_inputHandler.LeftButtonPressed += SetColorIfInRange;
             SetupControls(false);
         }
         
         void OnDisable()
         {
-            //_inputHandler.LeftButtonPressed -= SetColorIfInRange;
             DisableControls();
         
         }
 
         public void SetupControls(bool inverted)
         {
-            //_controlsInverted = inverted;
             _inputHandler.LeftButtonPressed +=  _colorPicker.SelectNextDelColor;
             _inputHandler.RightButtonPressed +=  _colorPicker.SelectNextDelShape;
 
@@ -53,7 +47,6 @@ namespace Einar.Core
         {
             _inputHandler.LeftButtonPressed -=  _colorPicker.SelectNextDelColor;
             _inputHandler.RightButtonPressed -=  _colorPicker.SelectNextDelShape;
-
             _inputHandler.DoubleButtonPressed -= Shoot;
         }
         

@@ -7,7 +7,6 @@ namespace Einar.Core
 {
     public class RoadSimulation : MonoBehaviour
     {
-        public static RoadSimulation Instance;
 
         public static event Action<float> OnSpeedChange;
 
@@ -20,10 +19,7 @@ namespace Einar.Core
         [SerializeField] float _acceleration;
 
 
-        void Awake()
-        {
-            Instance = this;    
-        }
+
 
         void Update()
         {

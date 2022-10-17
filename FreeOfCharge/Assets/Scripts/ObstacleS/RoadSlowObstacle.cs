@@ -9,9 +9,7 @@ namespace William
     {
         protected override void ExecutePunishment()
         {
-            var road = RoadSimulation.Instance;
 
-            road.ResetSpeed();
         }
     }
 }
