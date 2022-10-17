@@ -21,7 +21,6 @@ namespace Einar.Inputs
 
 
         public event Action LeftButtonPressed, RightButtonPressed, DoubleButtonPressed;
-
         public event Action LeftButtonReleased, RightButtonReleased, DoubleButtonReleased;
 
         MainInputs _mainInputs;
@@ -34,8 +33,8 @@ namespace Einar.Inputs
             rightCorotineOn = rightCoroutine != null;
             leftCorOn = leftCoroutine != null;
             doubleOn = doubleCoroutine != null;
-
         }
+        
 
         void Awake()
         {
