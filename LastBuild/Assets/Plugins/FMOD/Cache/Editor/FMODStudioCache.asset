@@ -1,0 +1,469 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9090772397060299416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Desktop/PlayerMovement.bank
+  m_EditorClassIdentifier: 
+  Path: FMODassets/FreeOfCharge/Build/Desktop/PlayerMovement.bank
+  Name: Desktop/PlayerMovement
+  StudioPath: bank:/PlayerMovement
+  lastModified: 638018785486409421
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-8489694581336411207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/Tutorial
+  m_EditorClassIdentifier: 
+  Name: Tutorial
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3377569722
+    data2: 3994059900
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-7355042242877301070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player Shooter/Shoot
+  m_EditorClassIdentifier: 
+  Path: event:/Player Shooter/Shoot
+  Guid:
+    Data1: 1850662919
+    Data2: 1292458375
+    Data3: 1532344961
+    Data4: -1341838454
+  Banks:
+  - {fileID: 1342415790876405374}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1343
+--- !u!114 &-5821634086605582092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Obstacles/Obstacle 1
+  m_EditorClassIdentifier: 
+  Path: event:/Obstacles/Obstacle 1
+  Guid:
+    Data1: -107313928
+    Data2: 1184728133
+    Data3: -1944829815
+    Data4: 1796515149
+  Banks:
+  - {fileID: -9090772397060299416}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 710
+--- !u!114 &-5613847274482259137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Delivery Zones/Wrong Delivery/Wrong Delivery
+  m_EditorClassIdentifier: 
+  Path: event:/Delivery Zones/Wrong Delivery/Wrong Delivery
+  Guid:
+    Data1: -1377674009
+    Data2: 1251400909
+    Data3: 1324275349
+    Data4: -1469139156
+  Banks:
+  - {fileID: 5923012976134718973}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1550
+--- !u!114 &-4689857164417701505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player Shooter/No Ammo
+  m_EditorClassIdentifier: 
+  Path: event:/Player Shooter/No Ammo
+  Guid:
+    Data1: 742301109
+    Data2: 1115938997
+    Data3: 1016179640
+    Data4: 1541330288
+  Banks:
+  - {fileID: 1342415790876405374}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 500
+--- !u!114 &-4566073931008858754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Desktop/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMODassets/FreeOfCharge/Build/Desktop/Master.bank
+  Name: Desktop/Master
+  StudioPath: bank:/Master
+  lastModified: 638018785486284699
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-3449070762588029904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player Shooter/Pick Shape
+  m_EditorClassIdentifier: 
+  Path: event:/Player Shooter/Pick Shape
+  Guid:
+    Data1: -845477415
+    Data2: 1317529979
+    Data3: 992003006
+    Data4: 1541514293
+  Banks:
+  - {fileID: 1342415790876405374}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 120
+--- !u!114 &-3263479091046288149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Delivery Zones/Correct Delivery/Correct Delivery
+  m_EditorClassIdentifier: 
+  Path: event:/Delivery Zones/Correct Delivery/Correct Delivery
+  Guid:
+    Data1: -289886292
+    Data2: 1224604601
+    Data3: 1170360964
+    Data4: 204461486
+  Banks:
+  - {fileID: 5923012976134718973}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3325
+--- !u!114 &-555740408862192284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player Shooter/Pick Color
+  m_EditorClassIdentifier: 
+  Path: event:/Player Shooter/Pick Color
+  Guid:
+    Data1: -1142695614
+    Data2: 1291340868
+    Data3: 923173015
+    Data4: -2108676069
+  Banks:
+  - {fileID: 1342415790876405374}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 120
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
+  m_Name: FMODStudioCache
+  m_EditorClassIdentifier: 
+  EditorBanks:
+  - {fileID: 3096472498026391836}
+  - {fileID: -4566073931008858754}
+  - {fileID: 5923012976134718973}
+  - {fileID: 3675314641784276348}
+  - {fileID: -9090772397060299416}
+  - {fileID: 1342415790876405374}
+  EditorEvents:
+  - {fileID: 6514310051884479332}
+  - {fileID: -3263479091046288149}
+  - {fileID: -5613847274482259137}
+  - {fileID: 6542657197953877148}
+  - {fileID: 8975823179478060736}
+  - {fileID: -5821634086605582092}
+  - {fileID: -7355042242877301070}
+  - {fileID: -555740408862192284}
+  - {fileID: -4689857164417701505}
+  - {fileID: -3449070762588029904}
+  EditorParameters: []
+  MasterBanks:
+  - {fileID: -4566073931008858754}
+  StringsBanks:
+  - {fileID: 3096472498026391836}
+  cacheTime: 638018785486439340
+  cacheVersion: 131593
+--- !u!114 &1342415790876405374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Desktop/PlayerShooter.bank
+  m_EditorClassIdentifier: 
+  Path: FMODassets/FreeOfCharge/Build/Desktop/PlayerShooter.bank
+  Name: Desktop/PlayerShooter
+  StudioPath: bank:/PlayerShooter
+  lastModified: 638018785486439340
+  FileSizes: []
+  Exists: 1
+--- !u!114 &3096472498026391836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Desktop/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: FMODassets/FreeOfCharge/Build/Desktop/Master.strings.bank
+  Name: Desktop/Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638018785486294673
+  FileSizes:
+  - Name: 
+    Value: 1586
+  Exists: 1
+--- !u!114 &3675314641784276348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Desktop/Music.bank
+  m_EditorClassIdentifier: 
+  Path: FMODassets/FreeOfCharge/Build/Desktop/Music.bank
+  Name: Desktop/Music
+  StudioPath: bank:/Music
+  lastModified: 638018785486389770
+  FileSizes: []
+  Exists: 1
+--- !u!114 &5868246152912765622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/Main Menu
+  m_EditorClassIdentifier: 
+  Name: Main Menu
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2023603239
+    data2: 2400983370
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &5923012976134718973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Desktop/Delivery Zones.bank
+  m_EditorClassIdentifier: 
+  Path: FMODassets/FreeOfCharge/Build/Desktop/Delivery Zones.bank
+  Name: Desktop/Delivery Zones
+  StudioPath: bank:/Delivery Zones
+  lastModified: 638018785486264753
+  FileSizes: []
+  Exists: 1
+--- !u!114 &6514310051884479332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Delivery Zones/Pickup Particles/Pickup Particles
+  m_EditorClassIdentifier: 
+  Path: event:/Delivery Zones/Pickup Particles/Pickup Particles
+  Guid:
+    Data1: 2061190706
+    Data2: 1241223485
+    Data3: -1080721523
+    Data4: -974263531
+  Banks:
+  - {fileID: 5923012976134718973}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 500
+--- !u!114 &6542657197953877148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Music
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Music
+  Guid:
+    Data1: 1440487494
+    Data2: 1308302152
+    Data3: -1857660242
+    Data4: 981319219
+  Banks:
+  - {fileID: 3675314641784276348}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -8489694581336411207}
+  - {fileID: 5868246152912765622}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 13714
+--- !u!114 &8975823179478060736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player Movement/Jump
+  m_EditorClassIdentifier: 
+  Path: event:/Player Movement/Jump
+  Guid:
+    Data1: 336562624
+    Data2: 1122288276
+    Data3: 2087241132
+    Data4: 1041807557
+  Banks:
+  - {fileID: -9090772397060299416}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1504
