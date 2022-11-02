@@ -4837,13 +4837,13 @@ PrefabInstance:
     - target: {fileID: 1776163421280610263, guid: 577a15124b23b584fbf18d14ef2f6338,
         type: 3}
       propertyPath: _obstacleTypes.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1776163421280610263, guid: 577a15124b23b584fbf18d14ef2f6338,
         type: 3}
       propertyPath: _obstacleTypes.Array.data[0]
       value: 
-      objectReference: {fileID: 8974793167353055019, guid: 55bab1f4d861217459161f21c9d38fbe,
+      objectReference: {fileID: 7213808933129762153, guid: fc7b4f0a8668c904887bb29c068f3f4a,
         type: 3}
     - target: {fileID: 1776163421280610263, guid: 577a15124b23b584fbf18d14ef2f6338,
         type: 3}

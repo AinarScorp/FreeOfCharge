@@ -13,6 +13,12 @@ namespace Player.Shooter
         public event Action<DeliveryContainer<DeliverableColor>> NewColorSelected;
         public event Action<DeliveryContainer<DeliverableShape>> NewShapeSelected;
         public event Action HasShot;
+        public event Action<bool> ChargeModified;
+
+        [Header("Ammo Setup")]
+        [SerializeField] float _maxCharges = 5;
+
+        [SerializeField] float _shootChargeSubtraction = -1;
 
 
         [SerializeField] protected List<DeliveryContainer<DeliverableColor>> _deliverableColors = new List<DeliveryContainer<DeliverableColor>>();
@@ -25,22 +31,32 @@ namespace Player.Shooter
         [SerializeField] Transform _shootingPointTransform;
 
         [SerializeField] float restoreChargeSpeed = 1.0f;
-        [SerializeField] float restoryParticleAmount = 0.1f;
 
         //Temp message "no charge"
         [SerializeField] TextMeshProUGUI cantShootMessage;
         float messageDuration = 2.0f;
         Coroutine messageIsShowing;
+        float currentNumberCharges;
+
 
         protected DeliveryContainer<DeliverableColor> _currentDeliveryColor;
         protected DeliveryContainer<DeliverableShape> _currentDeliveryShape;
 
+        #region Properties
+
+        
         public List<DeliveryContainer<DeliverableColor>> DeliverableColors => _deliverableColors;
         public List<DeliveryContainer<DeliverableShape>> DeliverableShapes => _deliverableShapes;
         
         public DeliveryContainer<DeliverableColor> CurrentDeliveryColor => _currentDeliveryColor;
 
         public DeliveryContainer<DeliverableShape> CurrentDeliveryShape => _currentDeliveryShape;
+
+        public float CurrentNumberCharges => currentNumberCharges;
+
+        public float MaxCharges => _maxCharges;
+
+        #endregion"
 
 
 
@@ -73,6 +89,9 @@ namespace Player.Shooter
                 deliverAboveHead.DisplayDeliveryAboveHead(_currentDeliveryColor.GetContainerType(), _currentDeliveryShape.GetContainerType());
             };
             SetupDeliveries();
+            ModifyCharge(_maxCharges);
+            StartCoroutine(Charging());
+
             if (cantShootMessage!=null)
             {
                 cantShootMessage.gameObject.SetActive(false);
@@ -85,14 +104,14 @@ namespace Player.Shooter
             _currentDeliveryShape = _deliverableShapes[0];
             NewColorSelected?.Invoke(_currentDeliveryColor);
             NewShapeSelected?.Invoke(_currentDeliveryShape);
-            foreach (var color in _deliverableColors)
-            {
-                StartCoroutine(Charging(color));
-            }
-            foreach (var shape in _deliverableShapes)
-            {
-                StartCoroutine(Charging(shape));
-            }
+            // foreach (var color in _deliverableColors)
+            // {
+            //     StartCoroutine(Charging(color));
+            // }
+            // foreach (var shape in _deliverableShapes)
+            // {
+            //     StartCoroutine(Charging(shape));
+            // }
         }
 
         public void ResetSelection()
@@ -103,38 +122,53 @@ namespace Player.Shooter
             NewShapeSelected?.Invoke(_currentDeliveryShape);
         }
         //These 2 charges are added by particles
-        public void ModifyCharge(DeliverableColor deliverableColor, float amount, bool byParticle = false)
-        {
-            foreach (var color in _deliverableColors)
-            {
-                if (color.GetContainerType() == deliverableColor)
-                {
-                    color.ModifyCharge(amount,byParticle);
-                    break;
-                }
-            }
-        }
-        public void ModifyCharge(DeliverableShape deliverableShape, float amount, bool byParticle = false)
-        {
-            foreach (var shape in _deliverableShapes)
-            {
-                if (shape.GetContainerType() == deliverableShape)
-                {
-                    shape.ModifyCharge(amount, byParticle);
-                    break;
-                }
-            }
-        }
-        IEnumerator Charging<T>(DeliveryContainer<T> container)
+         // public void ModifyCharge(DeliverableColor deliverableColor, float amount, bool byParticle = false)
+         // {
+         //     foreach (var color in _deliverableColors)
+         //     {
+         //         if (color.GetContainerType() == deliverableColor)
+         //         {
+         //             color.ModifyCharge(amount,byParticle);
+         //             break;
+         //         }
+         //     }
+         // }
+         // public void ModifyCharge(DeliverableShape deliverableShape, float amount, bool byParticle = false)
+         // {
+         //     foreach (var shape in _deliverableShapes)
+         //     {
+         //         if (shape.GetContainerType() == deliverableShape)
+         //         {
+         //             shape.ModifyCharge(amount, byParticle);
+         //             break;
+         //         }
+         //     }
+         // }
+        IEnumerator Charging()
         {
             while (true)
             {
-                if (container.CurrentNumberCharges <container.MaxCharges)
-                {
-                    container.ModifyCharge(Time.deltaTime *restoreChargeSpeed);
-                }
+                ModifyCharge(Time.deltaTime *restoreChargeSpeed);
+                // if (container.CurrentNumberCharges <container.MaxCharges)
+                // {
+                //     container.ModifyCharge(Time.deltaTime *restoreChargeSpeed);
+                // }
                 yield return new WaitForSeconds(0.1f);
             }
+        }
+        public void ModifyCharge(float amount, bool byParticle = false)
+        {
+            currentNumberCharges += amount;
+            if (currentNumberCharges < 0)
+            {
+                currentNumberCharges = 0;
+            }
+            else if (currentNumberCharges > _maxCharges)
+            {
+                currentNumberCharges = _maxCharges;
+            }
+            ChargeModified?.Invoke(byParticle);
+            
         }
         public virtual void SelectNextDelColor()
         {
@@ -166,19 +200,21 @@ namespace Player.Shooter
             PlayShapeSelectSound();
         }
 
-
+        bool CanShoot()
+        {
+            return currentNumberCharges >= 1.0f;
+        }
 
         public virtual void ShootDelivery()
         {
-            if (!_currentDeliveryColor.CanShoot() || !_currentDeliveryShape.CanShoot())
+            if (!CanShoot())
             {
                 messageIsShowing = StartCoroutine(NoChargesMessage());
                 return;
             }
             HasShot?.Invoke();
             
-            _currentDeliveryColor.ModifyCharge(-1);
-            _currentDeliveryShape.ModifyCharge(-1);
+            ModifyCharge(_shootChargeSubtraction);
 
             ThrownDelivery projectile = Instantiate(_thrownDeliveryPrefab, _shootingPointTransform.position, Quaternion.identity);
             DeliveryInfo info = new DeliveryInfo(_currentDeliveryColor.GetContainerType(), _currentDeliveryShape.GetContainerType());

@@ -26,11 +26,12 @@ namespace Particles
         
         DeliverableColor delColor;
         DeliverableShape delShape;
-        bool colorDelivered, shapeDelivered;
+        //bool colorDelivered, shapeDelivered;
 
         ParticleSystem _particleSystem;
+        CountDownImage _chargeUI;
 
-        CountDownImage colorChargeUI, shapeChargeUI;
+        //CountDownImage colorChargeUI, shapeChargeUI;
         void Awake()
         {
             _particleSystem = GetComponent<ParticleSystem>();
@@ -42,23 +43,23 @@ namespace Particles
         void Start()
         {
             _particleSystem.trigger.AddCollider(player.GetComponent<CharacterController>());
-            CountDownImage[] countDownImages = FindObjectsOfType<CountDownImage>();
-            if (countDownImages == null)
-            {
-                return;
-            }
-            foreach (var countDownImage in countDownImages)
-            {
-                if (countDownImage.DeliveryContainerColor != null)
-                {
-                    colorChargeUI = countDownImage;
-                }
-
-                if (countDownImage.DeliveryContainerShape !=null)
-                {
-                    shapeChargeUI = countDownImage;
-                }
-            }
+            _chargeUI = FindObjectOfType<CountDownImage>();
+            // if (countDownImage == null)
+            // {
+            //     return;
+            // }
+            // foreach (var countDownImage in countDownImages)
+            // {
+            //     if (countDownImage.DeliveryContainerColor != null)
+            //     {
+            //         colorChargeUI = countDownImage;
+            //     }
+            //
+            //     if (countDownImage.DeliveryContainerShape !=null)
+            //     {
+            //         shapeChargeUI = countDownImage;
+            //     }
+            // }
         }
 
 
@@ -71,18 +72,19 @@ namespace Particles
                 ParticleSystem.Particle particle = _particles[i];
                 particle.remainingLifetime = 0;
                 ColorPicker colorPicker = _particleSystem.trigger.GetCollider(0).GetComponent<ColorPicker>();
-                if (colorDelivered)
-                {
-                    if (colorPicker!=null)
-                        StartCoroutine(DragPointToChargeUI(colorPicker, colorChargeUI.ImageTransform, true));
-
-                }
-
-                if (shapeDelivered)
-                {                    
-                    if (colorPicker!=null) 
-                        StartCoroutine(DragPointToChargeUI(colorPicker, shapeChargeUI.ImageTransform, false));
-                }
+                if (colorPicker != null)
+                    StartCoroutine(DragPointToChargeUI(colorPicker, _chargeUI.ImageTransform));
+                
+                // if (colorDelivered)
+                // {
+                //
+                // }
+                //
+                // if (shapeDelivered)
+                // {                    
+                //     if (colorPicker!=null) 
+                //         StartCoroutine(DragPointToChargeUI(colorPicker, shapeChargeUI.ImageTransform, false));
+                // }
 
                 //print("collected particle  " + _particleSystem.trigger.GetCollider(0).name);
                 _particles[i] = particle;
@@ -94,7 +96,7 @@ namespace Particles
             _particleSystem.SetTriggerParticles(ParticleSystemTriggerEventType.Enter, _particles);
         }
 
-        IEnumerator DragPointToChargeUI(ColorPicker colorPicker, RectTransform chargePos, bool isColor)
+        IEnumerator DragPointToChargeUI(ColorPicker colorPicker, RectTransform chargePos)
         {
             if (colorPicker == null) yield break;
             if (chargePos == null)yield break;
@@ -104,16 +106,18 @@ namespace Particles
             Canvas canvas = GameObject.FindWithTag("Canvas").GetComponent<Canvas>();
             ChargePointUi createdPoint=  Instantiate(chargePoint,canvas.transform);
             yield return createdPoint.DeliverPoint(chargeUIstartPos,chargePos);
-            if (isColor)
-            {
-                colorPicker.ModifyCharge(delColor, chargeAmountPerParticle, true);
-
-            }
-            else
-            {
-                colorPicker.ModifyCharge(delShape, chargeAmountPerParticle, true);
-
-            }
+            colorPicker.ModifyCharge(chargeAmountPerParticle, true);
+            // if (isColor)
+            // {
+            //     colorPicker.ModifyCharge(delColor, chargeAmountPerParticle, true);
+            //
+            // }
+            // else
+            // {
+            //     colorPicker.ModifyCharge(delShape, chargeAmountPerParticle, true);
+            //
+            // }
+            
         }
         public void SetupParticle(Mesh shapeMesh, Material colorMaterial, DeliveryInfo info, bool colorDelivered, bool shapeDelivered)
         {
@@ -123,9 +127,7 @@ namespace Particles
             particleSystemRenderer.material = colorMaterial;
             delColor = info.Color;
             delShape = info.Shape;
-            this.colorDelivered = colorDelivered;
-            this.shapeDelivered = shapeDelivered;
-            
+
             //Setup burst
             ParticleSystem.Burst burst = _particleSystem.emission.GetBurst(0);
             burst.count = GetBurstCount(colorDelivered,shapeDelivered);

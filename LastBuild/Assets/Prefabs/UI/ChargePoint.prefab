@@ -90,5 +90,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rectTransform: {fileID: 2278253568539338734}
-  _delvierySpeed: 1
-  _shipMovement: {fileID: 0}
+  _delvierySpeed: 2

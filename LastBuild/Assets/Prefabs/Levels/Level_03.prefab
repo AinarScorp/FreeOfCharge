@@ -1668,7 +1668,7 @@ PrefabInstance:
     - target: {fileID: 1776163421280610263, guid: 577a15124b23b584fbf18d14ef2f6338,
         type: 3}
       propertyPath: _obstacleTypes.Array.size
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1776163421280610263, guid: 577a15124b23b584fbf18d14ef2f6338,
         type: 3}
@@ -2701,7 +2701,7 @@ PrefabInstance:
     - target: {fileID: 1776163421280610263, guid: 577a15124b23b584fbf18d14ef2f6338,
         type: 3}
       propertyPath: _obstacleTypes.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1776163421280610263, guid: 577a15124b23b584fbf18d14ef2f6338,
         type: 3}

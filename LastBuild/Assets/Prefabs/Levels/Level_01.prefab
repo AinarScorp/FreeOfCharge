@@ -857,18 +857,19 @@ PrefabInstance:
     - target: {fileID: 1776163421280610263, guid: 577a15124b23b584fbf18d14ef2f6338,
         type: 3}
       propertyPath: _obstacleTypes.Array.size
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1776163421280610263, guid: 577a15124b23b584fbf18d14ef2f6338,
         type: 3}
       propertyPath: _obstacleTypes.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1229579309915111322, guid: 03eb1f6a52719a849abb298d7ebd6bfc,
+        type: 3}
     - target: {fileID: 1776163421280610263, guid: 577a15124b23b584fbf18d14ef2f6338,
         type: 3}
       propertyPath: _obstacleTypes.Array.data[1]
       value: 
-      objectReference: {fileID: 1229579309915111322, guid: 03eb1f6a52719a849abb298d7ebd6bfc,
+      objectReference: {fileID: 4227741246662214115, guid: 88910e1afacc46f4b9d8a7233eaa3dbe,
         type: 3}
     - target: {fileID: 1776163421280610263, guid: 577a15124b23b584fbf18d14ef2f6338,
         type: 3}
@@ -4320,7 +4321,7 @@ PrefabInstance:
     - target: {fileID: 1776163421280610263, guid: 577a15124b23b584fbf18d14ef2f6338,
         type: 3}
       propertyPath: _obstacleTypes.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1776163421280610263, guid: 577a15124b23b584fbf18d14ef2f6338,
         type: 3}

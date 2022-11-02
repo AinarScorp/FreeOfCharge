@@ -30,6 +30,7 @@ namespace LevelDesign.Road
 
             levelPiecesQueue.Enqueue(newLevelPiece);
             bottomPiece = levelPiecesQueue.Dequeue();
+            Destroy(destoroyedLevelPiece.gameObject);
 
         }
 

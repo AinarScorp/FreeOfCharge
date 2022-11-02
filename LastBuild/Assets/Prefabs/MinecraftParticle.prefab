@@ -4888,4 +4888,4 @@ MonoBehaviour:
   chargeAmountPerParticle: 0.1
   _renderer: {fileID: 5395729035929739453}
   completeReward: 5
-  partialReward: 5
+  partialReward: 3

@@ -10,11 +10,10 @@ namespace Ui.DeliverInfo
     public class ColorInventoryUi : MonoBehaviour
     {
         
-        [SerializeField] HorizontalLayoutGroup colorTransform, shapeTransform, colorAmmoTransform,shapeAmmoTransform;
+        [SerializeField] HorizontalLayoutGroup colorTransform, shapeTransform;
         [SerializeField] Image colorImagePrefab;
         [SerializeField] Image shapeImagePrefab;
         [SerializeField] Image colorCrosshair, shapeCrosshair;
-        [SerializeField] Image ammoImage;
         [SerializeField] ColorPicker _colorPicker;
         [SerializeField] Sprite starImage, heartImage, emeraldImage;
         protected List<Image> _colorImages = new List<Image>();
@@ -51,11 +50,11 @@ namespace Ui.DeliverInfo
             foreach (var color in _colorPicker.DeliverableColors)
             {
                 Image createdImage = Instantiate(colorImagePrefab, colorTransform.transform);
-                Image createdBatter = Instantiate(ammoImage, colorAmmoTransform.transform);
-                CountDownImage countDownImage = createdBatter.GetComponentInChildren<CountDownImage>();
-                countDownImage.SetupCountDown(color);
-                color.ChargeModified+= countDownImage.UpdateCountDown;
-
+                // Image createdBatter = Instantiate(ammoImage, colorAmmoTransform.transform);
+                // CountDownImage countDownImage = createdBatter.GetComponentInChildren<CountDownImage>();
+                // countDownImage.SetupCountDown(color);
+                // color.ChargeModified+= countDownImage.UpdateCountDown;
+                //
 
                 createdImage.color = UpdateSLotColor(color.GetContainerType());
                 _colorImages.Add(createdImage) ;
@@ -64,11 +63,11 @@ namespace Ui.DeliverInfo
             foreach (var shape in _colorPicker.DeliverableShapes)
             {
                 Image createdImage = Instantiate(shapeImagePrefab, shapeTransform.transform);
-                Image createdBatter = Instantiate(ammoImage, shapeAmmoTransform.transform);
-
-                CountDownImage countDownImage = createdBatter.GetComponentInChildren<CountDownImage>();
-                countDownImage.SetupCountDown(shape);
-                shape.ChargeModified+= countDownImage.UpdateCountDown;
+                // Image createdBatter = Instantiate(ammoImage, shapeAmmoTransform.transform);
+                //
+                // CountDownImage countDownImage = createdBatter.GetComponentInChildren<CountDownImage>();
+                // countDownImage.SetupCountDown(shape);
+                // shape.ChargeModified+= countDownImage.UpdateCountDown;
 
                 //CountDownImage<DeliveryContainer<DeliverableShape>> countDownImage = createdImage.GetComponentInChildren<>()
                 createdImage.color = UpdateSlotShape(shape.GetContainerType());
@@ -76,6 +75,9 @@ namespace Ui.DeliverInfo
                 _shapeImages.Add(createdImage) ;
                 
             }
+
+            CountDownImage countDownImage = FindObjectOfType<CountDownImage>();
+            countDownImage.SetupCountDown(_colorPicker);
         }
 
 

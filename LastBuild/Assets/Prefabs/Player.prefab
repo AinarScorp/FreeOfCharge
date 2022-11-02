@@ -5825,32 +5825,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79091f5d6e16304697731238ad6629d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxCharges: 3
+  _shootChargeSubtraction: -1
   _deliverableColors:
   - deliveryType: 0
-    maxCharges: 2
-    currentNumberCharges: 2
   - deliveryType: 1
-    maxCharges: 2
-    currentNumberCharges: 2
   - deliveryType: 2
-    maxCharges: 2
-    currentNumberCharges: 2
   _deliverableShapes:
   - deliveryType: 0
-    maxCharges: 2
-    currentNumberCharges: 2
   - deliveryType: 1
-    maxCharges: 2
-    currentNumberCharges: 2
   - deliveryType: 2
-    maxCharges: 2
-    currentNumberCharges: 2
   deliverAboveHead: {fileID: 341593581265152907}
   _thrownDeliveryPrefab: {fileID: -9177713655875706133, guid: 990bcd809c1e7a14da3146abba585f3b,
     type: 3}
   _shootingPointTransform: {fileID: 6351769991794096527}
-  restoreChargeSpeed: 7
-  restoryParticleAmount: 0.1
+  restoreChargeSpeed: 5
   cantShootMessage: {fileID: 0}
 --- !u!114 &6554828449073421624
 MonoBehaviour:
