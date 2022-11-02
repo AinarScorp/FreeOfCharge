@@ -11,23 +11,10 @@ namespace LevelDesign.Obstacles
         [SerializeField] float _chargeReduction = 0.5f;
         protected override void ExecutePunishment()
         {
-            return;
             if (Player.TryGetComponent(out ColorPicker colorPicker))
             {
                 colorPicker.ModifyCharge(-_chargeReduction);
-
-                // foreach (var color in colorPicker.DeliverableColors)
-                // {
-                //     colorPicker.ModifyCharge(color.GetContainerType(), -_chargeReduction);
-                // }
-                //
-                // foreach (var shape in colorPicker.DeliverableShapes)
-                // {
-                //     colorPicker.ModifyCharge(shape.GetContainerType(), -_chargeReduction);
-                // }
             }
-            else
-                Debug.LogError("Something is wrong with obstacle");
         }
 
 
