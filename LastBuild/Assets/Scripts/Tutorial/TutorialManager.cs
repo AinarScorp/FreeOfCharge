@@ -3,6 +3,7 @@ using DeliveryZoneInfo;
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Tutorial
@@ -139,9 +140,17 @@ namespace Tutorial
                     break;
 
                 case TutorialSection.End:
-                    Application.Quit();
+                    StartCoroutine(ExitTutorial());
                     break;
             }
+        }
+
+        IEnumerator ExitTutorial()
+        {
+            yield return MoveToCenter();
+            yield return new WaitForSeconds(2);
+            SceneManager.LoadScene(1);
+            
         }
 
         /// <summary>
@@ -316,15 +325,7 @@ namespace Tutorial
             _mainCamera.Priority = 100;
             _pickingUpParticleCamera.Priority = 0;
 
-            var lerp = 0f;
-            while (lerp < 1)
-            {
 
-                _inventoryContainer.transform.localScale = new Vector3(1, 1, 1) * (Mathf.Lerp(_inventoryAnimationSize, 1, lerp));
-
-                lerp += Time.unscaledDeltaTime;
-                yield return null;
-            }
         }
 
         /// <summary>
@@ -335,7 +336,7 @@ namespace Tutorial
             yield return new WaitForSeconds(.05f);
             var originalTimescale = Time.timeScale;
             Time.timeScale = _slowdown;
-            yield return InventorySizeAnimation();
+            //yield return InventorySizeAnimation();
             Time.timeScale = originalTimescale;
         }
 
