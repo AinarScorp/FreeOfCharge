@@ -50,11 +50,11 @@ MonoBehaviour:
   spawnObstacles: 0
   delivery: {fileID: 2886095123379285532, guid: 2d86db4402082d546b1e5cc97654a2a0,
     type: 3}
-  _sectorWidth: 5
-  _sectorHeight: 5
-  _width: 10
-  _height: 10
-  _drawAlways: 0
+  _sectorWidth: 10
+  _sectorHeight: 10
+  _width: 1
+  _height: 1
+  _drawAlways: 1
   _showObstacleBorders: 1
   _showSectorLines: 1
   _spawnPointSizeMultiplier: 1

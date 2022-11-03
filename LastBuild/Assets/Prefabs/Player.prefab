@@ -5800,9 +5800,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28552a5d85ccea14cabe6c7af7c47662, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxSpeed: 15
-  _acceleration: 50
-  _deceleration: 15
+  _maxSpeed: 25
+  _acceleration: 60
+  _deceleration: 50
   _gravity: -98
   _heavierGravity: -75
   _gravityMultiplier: 3
@@ -5839,7 +5839,7 @@ MonoBehaviour:
   _thrownDeliveryPrefab: {fileID: -9177713655875706133, guid: 990bcd809c1e7a14da3146abba585f3b,
     type: 3}
   _shootingPointTransform: {fileID: 6351769991794096527}
-  restoreChargeSpeed: 5
+  restoreChargeSpeed: 9
   cantShootMessage: {fileID: 0}
 --- !u!114 &6554828449073421624
 MonoBehaviour:

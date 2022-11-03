@@ -286,7 +286,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 1.1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4888,4 +4888,4 @@ MonoBehaviour:
   chargeAmountPerParticle: 0.1
   _renderer: {fileID: 5395729035929739453}
   completeReward: 5
-  partialReward: 3
+  partialReward: 6

@@ -83,9 +83,6 @@ namespace LevelDesign
                 if (_spawnPoints.Count < 1) return;
                 int randomSpanwPointIndex = Random.Range(0, _spawnPoints.Count);
 
-                if (_obstacleTypes.Length < 1) return;
-                int randomObstacleIndex = Random.Range(0, _obstacleTypes.Length);
-
                 SpawnPoint spawnPoint = _spawnPoints[randomSpanwPointIndex];
                 Instantiate(delivery, spawnPoint._position, delivery.transform.rotation, this.transform);
                 _spawnPoints.Remove(spawnPoint);

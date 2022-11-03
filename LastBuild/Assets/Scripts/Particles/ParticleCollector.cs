@@ -125,9 +125,6 @@ namespace Particles
             //Get information
             particleSystemRenderer.mesh = shapeMesh;
             particleSystemRenderer.material = colorMaterial;
-            delColor = info.Color;
-            delShape = info.Shape;
-
             //Setup burst
             ParticleSystem.Burst burst = _particleSystem.emission.GetBurst(0);
             burst.count = GetBurstCount(colorDelivered,shapeDelivered);
