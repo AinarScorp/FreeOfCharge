@@ -27,14 +27,6 @@ namespace Tutorial
         /// <param name="amount">the amount of colors.</param>
         public void ColorCount(int amount)
         {
-            var colorAmmo = new List<Image>();
-            foreach (Transform child in _colorAmmoParent.transform)
-            {
-                var image = child.GetComponent<Image>();
-                colorAmmo.Add(image);
-                image.enabled = false;
-                image.transform.GetChild(0).gameObject.SetActive(false);
-            }
 
             foreach (Image color in _colorImages)
             {
@@ -44,9 +36,6 @@ namespace Tutorial
             for (int i = 0; i < amount; i++)
             {
                 _colorImages[i].enabled = true;
-                colorAmmo[i].enabled = true;
-                colorAmmo[i].GetComponentInChildren<Image>().enabled = true;
-                colorAmmo[i].transform.GetChild(0).gameObject.SetActive(true);
             }
         }
 
@@ -56,14 +45,6 @@ namespace Tutorial
         /// <param name="amount">the amount of shapes.</param>
         public void ShapeCount(int amount)
         {
-            var shapeAmmo = new List<Image>();
-            foreach (Transform child in _shapeAmmoParent.transform)
-            {
-                var image = child.GetComponent<Image>();
-                shapeAmmo.Add(image);
-                image.enabled = false;
-                image.transform.GetChild(0).gameObject.SetActive(false);
-            }
 
             foreach (Image shape in _shapeImages)
             {
@@ -73,9 +54,6 @@ namespace Tutorial
             for (int i = 0; i < amount; i++)
             {
                 _shapeImages[i].enabled = true;
-                shapeAmmo[i].enabled = true;
-                shapeAmmo[i].GetComponentInChildren<Image>().enabled = true;
-                shapeAmmo[i].transform.GetChild(0).gameObject.SetActive(true);
 
             }
         }
