@@ -93,7 +93,7 @@ MonoBehaviour:
   Path: FMODassets/FreeOfCharge/Build/Desktop/Delivery Zones.bank
   Name: Desktop/Delivery Zones
   StudioPath: bank:/Delivery Zones
-  lastModified: 638018785500000000
+  lastModified: 638018785486264753
   FileSizes: []
   Exists: 1
 --- !u!114 &-4566073931008858754
@@ -111,7 +111,7 @@ MonoBehaviour:
   Path: FMODassets/FreeOfCharge/Build/Desktop/Master.bank
   Name: Desktop/Master
   StudioPath: bank:/Master
-  lastModified: 638018785500000000
+  lastModified: 638018785486284699
   FileSizes: []
   Exists: 1
 --- !u!114 &-212185989282113698
@@ -129,7 +129,7 @@ MonoBehaviour:
   Path: FMODassets/FreeOfCharge/Build/Desktop/Music.bank
   Name: Desktop/Music
   StudioPath: bank:/Music
-  lastModified: 638018785500000000
+  lastModified: 638018785486389770
   FileSizes: []
   Exists: 1
 --- !u!114 &11400000
@@ -167,7 +167,7 @@ MonoBehaviour:
   - {fileID: -4566073931008858754}
   StringsBanks:
   - {fileID: 3096472498026391836}
-  cacheTime: 638018785500000000
+  cacheTime: 638018785486439340
   cacheVersion: 131593
 --- !u!114 &272737875600080927
 MonoBehaviour:
@@ -348,7 +348,7 @@ MonoBehaviour:
   Path: FMODassets/FreeOfCharge/Build/Desktop/PlayerShooter.bank
   Name: Desktop/PlayerShooter
   StudioPath: bank:/PlayerShooter
-  lastModified: 638018785500000000
+  lastModified: 638018785486439340
   FileSizes: []
   Exists: 1
 --- !u!114 &3096472498026391836
@@ -366,7 +366,7 @@ MonoBehaviour:
   Path: FMODassets/FreeOfCharge/Build/Desktop/Master.strings.bank
   Name: Desktop/Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638018785500000000
+  lastModified: 638018785486294673
   FileSizes:
   - Name: 
     Value: 1586
@@ -437,7 +437,7 @@ MonoBehaviour:
   Path: FMODassets/FreeOfCharge/Build/Desktop/PlayerMovement.bank
   Name: Desktop/PlayerMovement
   StudioPath: bank:/PlayerMovement
-  lastModified: 638018785500000000
+  lastModified: 638018785486409421
   FileSizes: []
   Exists: 1
 --- !u!114 &8364372622340584636
